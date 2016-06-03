@@ -1,0 +1,13 @@
+STATE,Lead PI,Site ID,Plot ID,Plot Name,DW Treatment,Depth of Tile Line (ft),Spacing of Tile Line (ft)
+IA,Helmers,SERF_IA,S1,Plot 1,shallow drainage,2.5,40
+IA,Helmers,SERF_IA,S2,Plot 2,"conventional ""free"" drainage",4,60
+IA,Helmers,SERF_IA,S3,Plot 3,controlled drainage,4,60
+IA,Helmers,SERF_IA,S4,Plot 4,controlled drainage,4,60
+IA,Helmers,SERF_IA,S5,Plot 5,"conventional ""free"" drainage",4,60
+IA,Helmers,SERF_IA,S6,Plot 6,shallow drainage,2.5,40
+IN,Frankenberger,DPAC,NW,NorthWest,controlled drainage,3,50
+IN,Frankenberger,DPAC,SW,SouthWest,"conventional ""free"" drainage",3,50
+IN,Frankenberger,DPAC,NE,NorthEast,"conventional ""free"" drainage",3,50
+IN,Frankenberger,DPAC,SE,SouthEast,controlled drainage,3,50
+OH,Fausey,STJOHNS,WS,WS Field,"conventional ""free"" drainage",3,40
+OH,Fausey,STJOHNS,WN,WN Field,controlled drainage,3,40
