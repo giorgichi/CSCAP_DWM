@@ -1,4 +1,4 @@
-STATE,Lead PI,Site ID,Plot ID,Plot Name,DW Treatment,Depth of Tile Line (ft),Spacing of Tile Line (ft)
+STATE,LeadPI,SiteID,PlotID,Plot_Name,DW_Treatment,TileDepth_(ft),TileSpacing_(ft)
 IA,Helmers,SERF_IA,S1,Plot 1,shallow drainage,2.5,40
 IA,Helmers,SERF_IA,S2,Plot 2,"conventional ""free"" drainage",4,60
 IA,Helmers,SERF_IA,S3,Plot 3,controlled drainage,4,60
