@@ -1,15 +1,10 @@
-#load pachages for reading different files
 library(readxl)
 library(foreign)
-
-#load packages for manipulating data
 library(dplyr)
 library(tidyr)
-
 library(ggplot2)
 
 #read fiel via browser 
-##soil <- read.csv(choose.files())
 soil <- read.csv("https://raw.githubusercontent.com/giorgichi/CSCAP_DWM/master/Soil_Properties.csv")
 plot <- read.csv("https://raw.githubusercontent.com/giorgichi/CSCAP_DWM/master/Plots.csv")
 
@@ -25,22 +20,15 @@ soil <- soil[soil$SOIL1!="",]
 #drop unused levels after reducing the data
 soil <- droplevels(soil)
 
-# #replace DNC and N/A with NA in the whole sheet
-# soil[soil == "DNC"] <- NA
-# soil[soil == "N/A"] <- NA
-# #creat vector of Soil Bulk Density data
-# soil$SOIL1 <- as.numeric(as.character(soil$SOIL1))
-
-
-#3 codes above can be replaced by this one 
+# convert Factors into Numeric
 soil$bd <- as.numeric(levels(soil$SOIL1))[soil$SOIL1]
 soil$WR0.1 <- as.numeric(levels(soil$SOIL30))[soil$SOIL30]*100
 soil$por <- (1-soil$bd/2.65)*100
 soil$gw <- soil$por - soil$WR0.1
 
 
-#analyzing soil bulk density
-#overall mean soil dry bulk density
+#calculating means
+#overall mean soil dry bulk density, wr at 0.1 bar, porosity, and gravitational water
 mean_bd <- mean(soil$bd, na.rm = TRUE)
 mean_wr0.1 <- mean(soil$WR0.1, na.rm = TRUE)
 mean_por <- mean(soil$por, na.rm = TRUE)
@@ -57,16 +45,13 @@ soil %>%
   summarise(bd = mean(bd, na.rm = TRUE), por = mean(por, na.rm = TRUE), 
             wr0.1 = mean(WR0.1, na.rm = TRUE), gw = mean(gw, na.rm = TRUE)) -> by_site_depth
 
-##spreading the output for presenting in table   
-##bd <- as.data.frame(spread(by_site_depth,key=site,value=bd))
-reshape(as.data.frame(by_site_depth), idvar = 'depth', timevar = 'site', direction = 'wide')
 
-#calculate porosity
 site_depth <- as.data.frame(by_site_depth)
 site_depth_long <- gather(site_depth, key = variables, value = values, bd:gw)
 head(site_depth_long)
 head(site_depth)
 
+#plotting
 qplot(depth, values, data= site_depth_long, size = I(4), color = site, geom = "point", facets = ~ variables)
 qplot(depth, bd, data= site_depth, size = I(4), geom = "point", facets = ~ site)
 qplot(depth, por, data= site_depth, size = I(4), geom = "point", facets = ~ site)
