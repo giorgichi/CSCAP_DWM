@@ -63,7 +63,6 @@ soil %>%
   summarise(bd = mean(bd, na.rm = TRUE), por = mean(por, na.rm = TRUE), 
             wr0.1 = mean(WR0.1, na.rm = TRUE), gw = mean(gw, na.rm = TRUE)) -> by_plot_depth
 ##spreading the output for presenting in table   
-##spread(mean_bd_plot_depth,key=plotid,value=bd)
 plot_depth <- as.data.frame(by_plot_depth)
 
 qplot(depth, bd, data = by_plot_depth, size = I(4), color = site, facets = ~ plotid)+ 
@@ -82,18 +81,5 @@ qplot(depth, gw, data = by_plot_depth, size = I(4), color = site, facets = ~ plo
   theme(axis.text.x = element_text(angle = 90))
 
 
-
-#mean bulk density by DWM and depth
-soil %>%
-  group_by(site, drainage, depth) %>%
-  summarise(bd = mean(bd, na.rm = TRUE), por = mean(por, na.rm = TRUE), 
-            wr0.1 = mean(WR0.1, na.rm = TRUE), gw = mean(gw, na.rm = TRUE))-> by_dwm_depth
-#spreading the output for presenting in table   
-#spread(by_dwm_depth,key=drainage,value=bd)
-
-qplot(depth, bd, data = by_dwm_depth, size = I(4), facets = ~ drainage)
-qplot(depth, bd, data = by_dwm_depth, size = I(4), shape = site, color = site, facets =  ~ drainage)
-
-
-##write.table(site_depth, "C:/Users/gio/Documents/CSCAP/Analysis/DWM paper/bd.txt", sep = ",", qmethod = "double", row.names = FALSE)
+##export table 
 write.table(format(site_depth, digits = 3), choose.files(), sep = "\t", quote = FALSE, row.names = FALSE, col.names = TRUE)
